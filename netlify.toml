@@ -1,9 +1,10 @@
 [build]
-  command = "npm install --legacy-peer-deps && npm run build"
-  publish = "dist"
+  command = "npm install && npm run build"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "20.18.0"
+  NODE_ENV = "development"
   NPM_FLAGS = "--legacy-peer-deps"
   NPM_LIFECYCLE_DEBUG = "true"
   NODE_OPTIONS = "--max_old_space_size=4096"
@@ -19,6 +20,15 @@
   NPM_CONFIG_SAVE_DEV = "true"
   NPM_CONFIG_SAVE_OPTIONAL = "true"
   NPM_CONFIG_SAVE_PEER = "false"
+  PRISMA_GENERATE_SKIP_POSTINSTALL = "true"
+
+[context.production]
+  command = "npm install && npm run build"
+  NODE_ENV = "production"
+
+[context.deploy-preview]
+  command = "npm install && npm run build"
+  NODE_ENV = "development"
   NPM_CONFIG_SAVE_BUNDLE = "false"
   NPM_CONFIG_SAVE_PREFIX = ""
   NPM_CONFIG_SAVE_EXACT = "true"
