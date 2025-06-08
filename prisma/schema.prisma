@@ -1,0 +1,78 @@
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // TestDaF specific fields
+  nativeLanguage String?
+  targetTDN      Int?
+  
+  // Relations
+  writingSubmissions WritingSubmission[]
+  progressEntries    ProgressEntry[]
+
+  @@map("users")
+}
+
+model WritingSubmission {
+  id        String   @id @default(cuid())
+  userId    String
+  content   String
+  taskType  String   // e.g., "task1", "task2", etc.
+  feedback  String?
+  score     Float?
+  createdAt DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("writing_submissions")
+}
+
+model ProgressEntry {
+  id        String   @id @default(cuid())
+  userId    String
+  score     Float
+  taskType  String
+  notes     String?
+  createdAt DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("progress_entries")
+}
+
+// Removed NewsletterSubscriber and ContactSubmission models - simplified for launch
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String
+  content     String
+  author      String
+  category    String
+  tags        String[]
+  imageUrl    String?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("blog_posts")
+}
