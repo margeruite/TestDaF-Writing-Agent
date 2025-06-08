@@ -4,17 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "20.18.0"
-  NODE_ENV = "production"
   NPM_FLAGS = "--legacy-peer-deps"
   NODE_OPTIONS = "--max_old_space_size=4096"
-  NPM_CONFIG_UNSAFE_PERM = "true"
-  NPM_CONFIG_PREFER_OFFLINE = "true"
-  NPM_CONFIG_AUDIT = "false"
-  NPM_CONFIG_UPDATE_NOTIFIER = "false"
-  NPM_CONFIG_PROGRESS = "false"
-  NPM_CONFIG_LOGLEVEL = "error"
   NEXT_TELEMETRY_DISABLED = "1"
-  PRISMA_SKIP_POSTINSTALL_GENERATE = "true"
 
 # Redirects for SPA
 [[redirects]]
@@ -22,15 +14,12 @@
   to = "/index.html"
   status = 200
   force = true
-    NODE_ENV = "production"
 
-# Development context (for branch deploys)
 [context.deploy-preview]
   command = "npm install --legacy-peer-deps && npm run build"
   publish = "dist"
   
   [context.deploy-preview.environment]
-    NODE_ENV = "development"
 
 # Add build plugins
 [[plugins]]

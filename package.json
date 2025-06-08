@@ -11,15 +11,14 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate deploy"
   },
-  "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
-  },
   "engines": {
     "node": ">=20.18.0",
     "npm": ">=10.0.0"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "devDependencies": {
-    "@prisma/cli": "^5.0.0",
     "prisma": "^5.0.0",
     "ts-node": "^10.9.2"
   },
