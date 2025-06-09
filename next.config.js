@@ -1,15 +1,15 @@
-const path = require('path');
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Static export configuration
-  output: 'export',
-  distDir: 'dist',
-  trailingSlash: true,
+  // Disable static optimization for now
+  output: 'standalone',
+  
+  // Enable React Strict Mode
+  reactStrictMode: true,
   
   // Image optimization
-  images: { 
+  images: {
     unoptimized: true,
+    domains: ['localhost'],
   },
   
   // Build configuration
@@ -19,6 +19,13 @@ const nextConfig = {
   
   typescript: {
     ignoreBuildErrors: false,
+  },
+  
+  // Webpack configuration
+  webpack: (config) => {
+    // Important: return the modified config
+    return config;
+  },
   },
   
   experimental: {
