@@ -1,13 +1,12 @@
 [build]
   command = "npm install && npm run build"
-  publish = ".next/standalone"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "20.18.0"
   NPM_FLAGS = "--legacy-peer-deps"
   NODE_OPTIONS = "--max_old_space_size=4096"
   NEXT_TELEMETRY_DISABLED = "1"
-  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 # Redirects for SPA
 [[redirects]]
@@ -16,15 +15,13 @@
   status = 200
   force = false
 
-[context.deploy-preview]
-  command = "npm install --legacy-peer-deps && npm run build"
-  publish = "dist"
-  
-  [context.deploy-preview.environment]
-
 # Add build plugins
 [[plugins]]
   package = "@netlify/plugin-nextjs"
-  [plugins.inputs]
-    build_command = "npm run build"
-    publish = ".next/standalone"
+
+# Handle SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false

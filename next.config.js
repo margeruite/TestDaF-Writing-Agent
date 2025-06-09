@@ -1,16 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Disable static optimization for now
-  output: 'standalone',
-  
-  // Enable React Strict Mode
-  reactStrictMode: true,
-  
   // Image optimization
   images: {
     unoptimized: true,
     domains: ['localhost'],
   },
+  
+  // Disable static optimization for now
+  output: 'export',
+  
+  // Enable React Strict Mode
+  reactStrictMode: true,
   
   // Build configuration
   eslint: {
@@ -21,11 +21,13 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   
+  // Handle static files
+  staticPageGenerationTimeout: 300,
+  
   // Webpack configuration
   webpack: (config) => {
     // Important: return the modified config
     return config;
-  },
   },
   
   experimental: {
