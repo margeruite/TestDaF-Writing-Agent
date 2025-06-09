@@ -1,3 +1,5 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Image optimization
@@ -31,7 +33,7 @@ const nextConfig = {
   },
   
   experimental: {
-    outputFileTracingRoot: path.join(__dirname, '../'),
+    outputFileTracingRoot: path.join(__dirname, './'),
   },
 };
 
